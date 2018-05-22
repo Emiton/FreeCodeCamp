@@ -19,13 +19,13 @@ function convertHTML(str) {
   var checkStr = str.split('');
   // Go through each word and check if it matches a value in the hash map
   // Replace with HTML value if it is found in the hash map
-  var replaceStr = checkStr.map(function (word){
+  checkStr = checkStr.map(function (word){
     if (basicHashMap.hasOwnProperty(word)) {
       word = basicHashMap[word];
     }
     return word;
   });
 
-  var fixedStr = replaceStr.join('');
+  var fixedStr = checkStr.join('');
   return fixedStr;
 }
