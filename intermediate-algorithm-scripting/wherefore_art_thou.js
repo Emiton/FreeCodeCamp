@@ -5,24 +5,20 @@
 **/
 
 function whatIsInAName(collection, source) {
-  // What's in a name?
-  var arr = [];
-  // Only change code below this line
-  
+  // Set array as collection, prompt asks user to return new array
+  var arr = collection;
   var sourceKeys = Object.keys(source);
-  
-  for (var i = 0; i < sourceKeys.length; i++) {
-    var key = sourceKeys[i];
-    console.log("KEY: " + key);
-    arr = collection.filter( function (item) {
-      console.log("ITEM IS: " + item);
-      console.log("ITEM VALUE IS: " + item.key);
-      return item.key == source.key;
-    });
 
+  // For each of the source keys, loop through array and remove objects
+  // Every object that does not match key-value pair is removed
+  for (var i = 0; i < sourceKeys.length; i++) {
+    // arr is refined each iteration, next loop will use filtered array
+    arr = arr.filter( function (item) {
+      return item[ sourceKeys[i] ] == source[ sourceKeys[i] ];
+    });
   }
-  // Only change code above this line
   return arr;
 }
 
+// Call the function
 whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
