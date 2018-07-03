@@ -7,8 +7,17 @@
 **/
 
 function smallestCommons(arr) {
-  var highestOrderFactorsArray = [];
+  var highestOrderFactors = {};
   for (var i = Math.min(...arr); i <= Math.max(...arr); i++) {
+    var currentFactorsArray = [];
+    currentFactorsArray = primeFactorization(i);
+    currentFactorsArray.sort();
+
+    
+    // count factors
+    // check if factor in array
+      // if in, check if greater than push
+      // if not, add factor and number into array
     
   }
   return arr;
@@ -39,6 +48,14 @@ function primeFactorization(num) {
   
 
   return factorArray;
+}
+
+function countFactors (factorArray) {
+  var countedFactorArray = [];
+  var currentValue = factorArray[0];
+  for (var i = 0; i < factorArray.length; i++) {
+    
+  } 
 }
 
 
