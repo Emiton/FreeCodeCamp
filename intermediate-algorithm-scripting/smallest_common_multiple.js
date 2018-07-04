@@ -24,9 +24,48 @@ function smallestCommons(arr) {
 }
 
 
+function smallestCommons(arr) {
+  // Object will hold unique prime factors for all numbers included
+  // Key is the prime factor
+  // Value is the # of times it occur (only the most frequent occurence for a single number is stored)
+  var highestOrderFactors = {};
+  for (var i = Math.min(...arr); i <= Math.max(...arr); i++) {
+    var currentFactorsArray = [];
+    // Get all prime factors
+    currentFactorsArray = primeFactorization(i);
+    // Sort and count the prime factors
+    var sortedAndCountedFactors = countFactors(currentFactorsArray);
+    // Create array of unique prime factors for current number
+    var allFactors = Object.keys(sortedAndCountedFactors);
+    console.log(allFactors);
+    for (var j = 0; j < allFactors.length; j++) {
+      if (highestOrderFactors.hasOwnProperty(allFactors[i])) {
+        console.log("Checking if occurence is greater");
+        if (sortedAndCountedFactors[allFactors[i]] > highestOrderFactors[allFactors[i]]) {
+          highestOrderFactors[allFactors[i]] = sortedAndCountedFactors[allFactors[i]];
+          console.log("It's GREATER BABY!");
+        }
+      } else {
+          highestOrderFactors[allFactors[i]] = sortedAndCountedFactors[allFactors[i]];
+          console.log("NEW ELEMENT ADDED");
+      }
+    }
+  }
+  var total = 0; 
+  var commonFactors = Object.keys(highestOrderFactors); 
+  for (var i = 0; i < commonFactors; i++) {
+    var factor = parseInt(commonFactors[i]);
+    var power = highestOrderFactors[commonFactors[i]];
+    total += Math.pow(factor,power);
+    console.log(power);
+    console.log(factor);
+  }
+  return total;
+}
+
+
 function primeFactorization(num) {
   var factorArray = [];
-  var factorOrderArray = [];
 
   while (num % 2 == 0) {
     factorArray.push(2);
@@ -45,17 +84,24 @@ function primeFactorization(num) {
     factorArray.push(num);
   }
 
-  
+  factorArray.sort();
 
   return factorArray;
 }
 
+// Takes an array of factors and counts them
+// Returns an object with factors as keys and occurences as values
 function countFactors (factorArray) {
-  var countedFactorArray = [];
+  var countedFactors = {};
+  var factorCount = 0;
   var currentValue = factorArray[0];
-  for (var i = 0; i < factorArray.length; i++) {
-    
+  var i = 0;
+  while (i < factorArray.length) {
+    factorCount = factorArray.lastIndexOf(factorArray[i]) - i + 1;
+    countedFactors[ factorArray[i] ] = factorCount;
+    i += factorCount;
   } 
+  return countedFactors;
 }
 
 
