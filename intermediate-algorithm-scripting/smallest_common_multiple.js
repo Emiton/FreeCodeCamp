@@ -1,4 +1,10 @@
 /**
+ * Algorithm : Smallest Common Multiple
+ * 
+ * Method: Use prime factorization on each number. For each unique prime factor, only store 
+ *         the greatest number of occurrences. After all prime factors are found for each number,
+ *         multiply out the prime factors. See the 'Art of Problem Solving' article for more info.
+ * 
  * Resources: 
  * -https://math.stackexchange.com/questions/1039519/finding-prime-factors-by-taking-the-square-root
  * -https://artofproblemsolving.com/wiki/index.php?title=Least_common_multiple
