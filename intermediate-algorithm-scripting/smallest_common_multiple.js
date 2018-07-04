@@ -1,28 +1,8 @@
 /**
- * 
- * 
  * Resources: 
  * -https://math.stackexchange.com/questions/1039519/finding-prime-factors-by-taking-the-square-root
  * -https://artofproblemsolving.com/wiki/index.php?title=Least_common_multiple
 **/
-
-function smallestCommons(arr) {
-  var highestOrderFactors = {};
-  for (var i = Math.min(...arr); i <= Math.max(...arr); i++) {
-    var currentFactorsArray = [];
-    currentFactorsArray = primeFactorization(i);
-    currentFactorsArray.sort();
-
-    
-    // count factors
-    // check if factor in array
-      // if in, check if greater than push
-      // if not, add factor and number into array
-    
-  }
-  return arr;
-}
-
 
 function smallestCommons(arr) {
   // Object will hold unique prime factors for all numbers included
@@ -37,28 +17,28 @@ function smallestCommons(arr) {
     var sortedAndCountedFactors = countFactors(currentFactorsArray);
     // Create array of unique prime factors for current number
     var allFactors = Object.keys(sortedAndCountedFactors);
-    console.log(allFactors);
+    // Add factors to highestOrderFactors
+    // If it exists, only replace if factors occurs more frequently
+    // If does not exist, add to object
     for (var j = 0; j < allFactors.length; j++) {
-      if (highestOrderFactors.hasOwnProperty(allFactors[i])) {
-        console.log("Checking if occurence is greater");
-        if (sortedAndCountedFactors[allFactors[i]] > highestOrderFactors[allFactors[i]]) {
-          highestOrderFactors[allFactors[i]] = sortedAndCountedFactors[allFactors[i]];
-          console.log("It's GREATER BABY!");
+      if (highestOrderFactors.hasOwnProperty(allFactors[j])) {
+        if (sortedAndCountedFactors[allFactors[j]] > highestOrderFactors[allFactors[j]]) {
+          highestOrderFactors[allFactors[j]] = sortedAndCountedFactors[allFactors[j]];
         }
       } else {
-          highestOrderFactors[allFactors[i]] = sortedAndCountedFactors[allFactors[i]];
-          console.log("NEW ELEMENT ADDED");
+          highestOrderFactors[allFactors[j]] = sortedAndCountedFactors[allFactors[j]];
       }
     }
   }
-  var total = 0; 
+  var total = 1; 
+  // Get all the factors
   var commonFactors = Object.keys(highestOrderFactors); 
-  for (var i = 0; i < commonFactors; i++) {
+  // Multiply all of the prime factors to find the smallest common multiple
+  for (var i = 0; i < commonFactors.length; i++) {
     var factor = parseInt(commonFactors[i]);
-    var power = highestOrderFactors[commonFactors[i]];
-    total += Math.pow(factor,power);
-    console.log(power);
-    console.log(factor);
+    var power = highestOrderFactors[ commonFactors[i] ];
+    total *= Math.pow(factor,power);
+
   }
   return total;
 }
